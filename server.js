@@ -1,10 +1,12 @@
+//dependencies
 const express = require('express');
-const app = express();
 const PORT = process.env.PORT || 3001;
 
 //routes
-const apiRoutes = require('./routes/api')
-const htmlRoutes = require('./routes/html');
+const apiRoutes = require('./routes/api/index')
+const htmlRoutes = require('./routes/html/index');
+
+const app = express();
 
 // parse incoming data
 app.use(express.urlencoded({ extended: true }));
@@ -17,5 +19,5 @@ app.use(express.static('public'));
 
 
 app.listen(PORT, () => {
-    console.log(`API server now on port ${PORT}!`);
+    console.log(`API server now ready on port http://localhost:${PORT}!`);
   });
