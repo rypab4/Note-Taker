@@ -1,23 +1,27 @@
-//dependencies
-const express = require('express');
-const PORT = process.env.PORT || 3001;
 
-//routes
-const apiRoutes = require('./routes/api/index')
-const htmlRoutes = require('./routes/html/index');
+const express = require('express')
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-// parse incoming data
+// import the routes
+const apiRoutes = require('./routes/api/apiRoutes');
+const htmlRoutes = require('./routes/html/htmlIndex');
+
+// parse income string or array data
 app.use(express.urlencoded({ extended: true }));
 
-// parse JSON
+// parse incoming JSON
 app.use(express.json());
-app.use('/api', apiRoutes);
-app.use('/', htmlRoutes);
+
+// use express static on public folder
 app.use(express.static('public'));
 
 
+app.use('/api', apiRoutes);
+app.use('/', htmlRoutes);
+
+
 app.listen(PORT, () => {
-    console.log(`API server now ready on port http://localhost:${PORT}!`);
-  });
+    console.log(`API server now on port ${PORT}!`);
+});
